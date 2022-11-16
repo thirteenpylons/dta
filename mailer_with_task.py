@@ -29,10 +29,7 @@ class Mail:
     def old_send_task(self, response: str) -> bool:
         """function to verify information prior to email"""
         approve = ["yes", "y"]
-        if response.lower() in approve:
-            return True
-        else:
-            return False
+        return response.lower() in approve
 
     def verify_data(self) -> None:
         task_loop = True
@@ -41,12 +38,11 @@ class Mail:
             print("Verify the information:\n")
             print(f"\trecipient:\n\t\t {self.recipient},\n\n \tsubject:\n\t\t {self.subject},\n\n \tbody:\n\t\t {self.body(self.recipient)}\n")
             ask = input("Verify information for email:")
-            step = self.send_task(ask)
-            if not step:
+            if step := self.send_task(ask):
+                self.send_mail(self.recipient, self.subject, self.body(self.recipient))
+            else:
                 print("Aborting...")
                 task_loop = False
-            else:
-                self.send_mail(self.recipient, self.subject, self.body(self.recipient))
 
     def send_mail(self, recipient: str, subject: str, body: str) -> None:
         outlook = win32.Dispatch('outlook.application')

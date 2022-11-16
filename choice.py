@@ -57,10 +57,7 @@ class Task:
 
     def analyze_response(self, response: str) -> bool:
         valid_responses = ["yes", "y"]
-        if response.lower() in valid_responses:
-            self.send = True
-        else:
-            self.send = False
+        self.send = response.lower() in valid_responses
 
     def increment_failed(self):
         self.failed_attempts += 1
