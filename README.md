@@ -1,1 +1,3 @@
 # dta
+Automated emails and now refactoring...
+DTA will be the home for my data manipulation lib.
